@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var router = express.Router();
 var port = process.env.API_PORT || 3001;
+mongoose.connect('mongodb://user:password@ds235708.mlab.com:35708/stream')
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
