@@ -7,7 +7,18 @@ var bodyParser = require('body-parser');
 var app = express();
 var router = express.Router();
 var port = process.env.API_PORT || 3001;
-mongoose.connect('mongodb://user:password@ds235708.mlab.com:35708/stream')
+mongoose.connect('mongodb://user:password@ds235708.mlab.com:35708/stream');
+var Twitter = require('twitter-node-client').Twitter;
+var config = {
+    "consumerKey": "cpecZPk3NRIkQ5CWENxfUTBnm",
+    "consumerSecret": "TfCL2ETOJRhC3JIN6RX4uUblAaxytKYSj3BuPPNxIm0LsF7sCO",
+    "accessToken": "958834013782786048-t0hWgInn9tmdRCJZdkzXo0gus8LgB9c",
+    "accessTokenSecret": "60nKg0U1tiPVumRmahhDT9a35aV17iK5LbKuNkeGCEzlK",
+    "callBackUrl": "XXX"
+};
+
+var twitter = new Twitter(config);
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -20,6 +31,7 @@ app.use(function(req, res, next) {
  res.setHeader('Cache-Control', 'no-cache');
  next();
 });
+
 
 router.get('/', function(req, res) {
   res.json({
