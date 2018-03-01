@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 
 var ResultSchema = ({
-  tweets:[String]
+  tweet_ids:[String]
 });
 
 module.exports = mongoose.model('Result', ResultSchema);
