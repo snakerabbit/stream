@@ -19,6 +19,9 @@ var twitter = new Twitter(config);
 var Result = require('./model/results');
 var Tweet = require('./model/tweets');
 
+var success = function (data) {
+    	console.log(JSON.parse(data).statuses);
+	};
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -45,7 +48,15 @@ router.route('/results').get(function(req, res){
     }
     res.json(results);
   });
-});
+})
+  .post(function(req, res){
+    var result = new Result();
+      return twitter.getSearch({'q':'#haiku','count': 10}, function(err, response, body){
+        console.log('ERROR [%s]', err);},
+        function(data){
+          console.log(JSON.parse(data).statuses);
+        });
+  });
 app.use('/api', router);
 app.listen(port, function() {
   console.log(`api running on port ${port}`);
