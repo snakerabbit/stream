@@ -2,7 +2,7 @@ var error = function (err, response, body) {
     	console.log('ERROR [%s]', err);
 	};
 	var success = function (data) {
-    	console.log(data);
+    	console.log(JSON.parse(data).statuses[4].text);
 	};
 
 	var Twitter = require('twitter-node-client').Twitter;
@@ -18,4 +18,4 @@ var error = function (err, response, body) {
 
   var twitter = new Twitter(config);
 
-  twitter.getSearch({'q':'#haiku','count': 1}, error, success);
+  twitter.getSearch({'q':'#haiku','count': 10}, error, success);

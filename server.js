@@ -3,7 +3,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-
 var app = express();
 var router = express.Router();
 var port = process.env.API_PORT || 3001;
@@ -16,9 +15,9 @@ var config = {
     "accessTokenSecret": "60nKg0U1tiPVumRmahhDT9a35aV17iK5LbKuNkeGCEzlK",
     "callBackUrl": "XXX"
 };
-
 var twitter = new Twitter(config);
-
+var Result = require('./model/results');
+var Tweet = require('./model/tweets');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -39,6 +38,14 @@ router.get('/', function(req, res) {
   });
 });
 
+router.route('/results').get(function(req, res){
+  Result.find(function(err, results){
+    if(err){
+      console.log(err);
+    }
+    res.json(results);
+  });
+});
 app.use('/api', router);
 app.listen(port, function() {
   console.log(`api running on port ${port}`);

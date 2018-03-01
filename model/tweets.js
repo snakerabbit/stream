@@ -11,7 +11,6 @@ var TweetSchema = new Schema({
 
 module.exports = mongoose.model('Tweet', TweetSchema);
 
-
 // {"statuses":
 //   [{"created_at":"Thu Mar 01 07:19:31 +0000 2018",
 //     "id":969109866081026049,"id_str":"969109866081026049",
