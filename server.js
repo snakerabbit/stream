@@ -54,7 +54,12 @@ router.route('/results').get(function(req, res){
       return twitter.getSearch({'q':'#haiku','count': 10}, function(err, response, body){
         console.log('ERROR [%s]', err);},
         function(data){
+
           console.log(JSON.parse(data).statuses);
+          let statuses = data.statuses;
+          let ids = data.statuses.map (status =>{
+            return status.id;
+          });
         });
   });
 app.use('/api', router);
